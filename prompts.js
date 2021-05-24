@@ -58,6 +58,33 @@ function renderOutput(option) {
 
 }
 
+function userInputDept () {
+    inquirer.prompt([
+        {
+            type : 'input',
+            name : 'name',
+            message : 'What is the name of the department?',
+            validate : nameInput => {
+                if (nameInput)
+                {
+                    return true;
+                }
+                else
+                {
+                    console.log("Invalid Entry! Please try again.");
+                    return false;
+                }
+            }
+        }
+        
+    ])
+    .then((response) => {
+        console.log(response);
+        const department = new Department(response.name);
+        department.addDepartment();
+        questions();
+    })
+}
 
 
 
