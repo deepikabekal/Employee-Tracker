@@ -86,7 +86,54 @@ function userInputDept () {
     })
 }
 
-
+function userInputRole () {
+    const department = new Department();
+    var deptList = department.getDepartmentList();
+    //console.log("deptList", deptList);
+    inquirer.prompt([
+        {
+            type : 'input', 
+            name : 'title',
+            message : 'What is the title of the role?',
+            validate : titleInput => {
+                if (titleInput)
+                {
+                    return true;
+                }
+                else
+                {
+                    console.log("Invalid Entry! Please try again");
+                    return false;
+                }
+            }
+        },
+        {
+            type : 'input',
+            name : 'salary',
+            message : 'What is the salary for the role?',
+            validate : salaryInput => {
+                if (isNaN(salaryInput))
+                {
+                    console.log("Invalid Entry! Salary has to be a number!");
+                    return false;
+                }
+                return true;
+            }
+        },
+        {
+            type : 'list',
+            name : 'departmentName',
+            message : 'Choose a department to which the role belongs.',
+            choices : deptList
+        }
+    ])
+    .then (response => {
+        console.log(response);
+        const role = new Role(response);
+        role.addRole();
+        questions();
+    })
+}
 
 questions();
 
