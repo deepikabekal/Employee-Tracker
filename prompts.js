@@ -135,5 +135,65 @@ function userInputRole () {
     })
 }
 
+
+function userInputEmp() {
+    const employee = new Employee();
+    const role = new Role();
+    var empList = employee.getEmployeeList();
+    var roleList = role.getRoleList();
+    inquirer.prompt([
+        {
+            type : 'input',
+            name : 'firstName', 
+            message : 'What is the first name of the employee?',
+            validate : firstName => {
+                if (firstName)
+                {
+                    return true;
+                }
+                else
+                {
+                    console.log("Incorrect Entry! Please try again");
+                    return false;
+                }
+            }
+        },
+        {
+            type : 'input',
+            name : 'lastName', 
+            message : 'What is the last name of the employee?',
+            validate : lastName => {
+                if (lastName)
+                {
+                    return true;
+                }
+                else
+                {
+                    console.log("Incorrect Entry! Please try again");
+                    return false;
+                }
+            } 
+        },
+        {
+            type : 'list',
+            name : 'roleName', 
+            message : 'What is the role of the employee?',
+            choices : roleList
+        },
+        {
+            type : 'list',
+            name : 'managerName', 
+            message : 'What is the name of the Manager?',
+            choices : empList
+        }
+    ])
+    .then(response => {
+        console.log("response", response);
+    })
+}
+
+
+
+
 questions();
 
