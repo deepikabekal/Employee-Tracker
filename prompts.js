@@ -189,10 +189,38 @@ function userInputEmp() {
     ])
     .then(response => {
         console.log("response", response);
+        const employee = new Employee(response);
+        employee.addEmployee();
+        questions();
     })
 }
 
-
+function userUpdateEmp () {
+    const employeeOne = new Employee();
+    const roleOne = new Role();
+    var empListONe = employeeOne.getEmployeeList();
+    var roleListONe = roleOne.getRoleList();
+    inquirer.prompt([
+        {
+            type : 'list',
+            name : 'employeeName',
+            message : "Which employee information do you want to update?",
+            choices : empListONe
+        },
+        {
+            type : 'list',
+            name : 'roleName',
+            message  :'Choose a role',
+            choices : roleListONe
+        }
+    ])
+    .then(response => {
+        console.log(response);
+        const employee = new Employee(response);
+        employee.updateEmployeeRole();
+        questions();
+    })
+}
 
 
 questions();
