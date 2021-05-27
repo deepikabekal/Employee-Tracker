@@ -140,6 +140,7 @@ function userInputEmp() {
     const employee = new Employee();
     const role = new Role();
     var empList = employee.getEmployeeList();
+    console.log("emplist", empList);
     var roleList = role.getRoleList();
     inquirer.prompt([
         {
@@ -199,8 +200,11 @@ function userUpdateEmp () {
     const employeeOne = new Employee();
     const roleOne = new Role();
     var empListONe = employeeOne.getEmployeeList();
+    console.log("emplist", empListONe);
     var roleListONe = roleOne.getRoleList();
     inquirer.prompt([
+        
+        
         {
             type : 'list',
             name : 'employeeName',
