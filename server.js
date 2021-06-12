@@ -4,9 +4,13 @@ const prompts = require('./prompts');
 const Department = require ('./lib/Department');
 const Employee = require ('./lib/Employee');
 const Role = require ('./lib/Role');
+const { promise } = require('./db/connection');
+
+
 
 
 function initiateApp () {
+    console.log("I am inside the initiateApp");
     inquirer.prompt(prompts.initialQuestions)
     .then(response => {
         renderOutput(response.options);                        
@@ -15,22 +19,27 @@ function initiateApp () {
 
 
 
-function renderOutput(option) {
+async function renderOutput(option) {
     switch (option) {
         case "View all departments" :
             const department = new Department();
-            department.getAllDepartments();
-            //questions();
+            console.log ("=================  All Departments ===========");
+            let [rows,fields]  =  await department.getAllDepartments();
+            console.table(rows)
+            initiateApp();            
             break;
         
         case "View all roles" :
             const role = new Role();
+            console.log ("=================  All Roles ===========");
             role.getAllRoles();
+            initiateApp();
             break;
         
         case "View all employees" :
             const employee = new Employee();
             employee.getAllEmployees();
+            initiateApp();
             break;
 
         case "Add a department" :
@@ -59,13 +68,14 @@ function renderOutput(option) {
 
 }
 
-function userInputDept () {
-    inquirer.prompt(prompts.departmentQuestions)
+async function userInputDept () {
+    await inquirer.prompt(prompts.departmentQuestions)
     .then((response) => {
         //console.log(response);
         const department = new Department(response.name);
         department.addDepartment();
-        questions();
+    }).then(data => {
+        initiateApp();
     })
 }
 
@@ -131,9 +141,10 @@ function userUpdateEmp () {
 }
 
 async function repeatQuestions(options) {
-    await initiateApp();
     renderOutput(options);
     console.log("hello");
+    await initiateApp();
+    
 }
 
 
