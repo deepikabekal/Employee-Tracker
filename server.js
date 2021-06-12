@@ -24,15 +24,16 @@ async function renderOutput(option) {
         case "View all departments" :
             const department = new Department();
             console.log ("=================  All Departments ===========");
-            let [rows,fields]  =  await department.getAllDepartments();
-            console.table(rows)
+            let [deptRows,deptFields]  =  await department.getAllDepartments();
+            console.table(deptRows)
             initiateApp();            
             break;
         
         case "View all roles" :
             const role = new Role();
             console.log ("=================  All Roles ===========");
-            role.getAllRoles();
+            let [roleRows, roleFields] = await role.getAllRoles();
+            console.table(roleRows);
             initiateApp();
             break;
         
@@ -83,8 +84,7 @@ function userInputRole () {
     const department = new Department();
     var deptList = department.getDepartmentList();
     //console.log("deptList", deptList);
-    inquirer.prompt(
-        )
+    inquirer.prompt(prompts.roleQuestions)
     .then (response => {
         console.log(response);
         const role = new Role(response);
