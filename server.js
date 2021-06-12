@@ -72,12 +72,12 @@ async function renderOutput(option) {
 }
 
 async function userInputDept () {
-    await inquirer.prompt(prompts.departmentQuestions)
+    inquirer.prompt(prompts.departmentQuestions)
     .then((response) => {
         //console.log(response);
         const department = new Department(response.name);
         department.addDepartment();
-    }).then(data => {
+        console.log(`Added ${response.name} department to the database.`);
         initiateApp();
     })
 }
