@@ -4,7 +4,7 @@ const prompts = require('./prompts');
 const Department = require ('./lib/Department');
 const Employee = require ('./lib/Employee');
 const Role = require ('./lib/Role');
-const { promise } = require('./db/connection');
+//const { promise } = require('./db/connection');
 
 
 
@@ -87,10 +87,11 @@ function userInputRole () {
     var deptList = department.getDepartmentList();
     //console.log("deptList", deptList);
     inquirer.prompt(prompts.roleQuestions)
-    .then (response => {
+    .then(response => {
         //console.log(response);
         const role = new Role(response);
         role.addRole();
+        console.log(`Added role to the database.`); 
         initiateApp();
     })
 }
@@ -118,22 +119,20 @@ function userUpdateEmp () {
     var empListONe = employeeOne.getEmployeeList();
     console.log("emplist", empListONe);
     var roleListONe = roleOne.getRoleList();
-    inquirer.prompt(
-        
-        
-        )
+    inquirer.prompt(prompts.updateEmpQuestions)
     .then(response => {
         //console.log(response);
         if (!response.confirmation)
         {
-            questions();
+            initiateApp();
         }
         else
         {
             //console.log("here");
             const employee = new Employee(response);
             employee.updateEmployeeRole();
-            questions();
+            console.log(`${response.employeeName}'s role has been updated.`);   
+            initiateApp();
         }
         
     })
