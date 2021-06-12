@@ -71,7 +71,7 @@ async function renderOutput(option) {
 
 }
 
-async function userInputDept () {
+function userInputDept () {
     inquirer.prompt(prompts.departmentQuestions)
     .then((response) => {
         //console.log(response);
@@ -88,10 +88,10 @@ function userInputRole () {
     //console.log("deptList", deptList);
     inquirer.prompt(prompts.roleQuestions)
     .then (response => {
-        console.log(response);
+        //console.log(response);
         const role = new Role(response);
         role.addRole();
-        questions();
+        initiateApp();
     })
 }
 
@@ -100,16 +100,15 @@ function userInputEmp() {
     const employee = new Employee();
     const role = new Role();
     var empList = employee.getEmployeeList();
-    console.log("emplist", empList);
+    //console.log("emplist", empList);
     var roleList = role.getRoleList();
-    inquirer.prompt(
-        
-        )
+    inquirer.prompt(prompts.addEmpQuestions)
     .then(response => {
-        console.log("response", response);
+        //console.log("response", response);
         const employee = new Employee(response);
         employee.addEmployee();
-        questions();
+        console.log(`Employee ${response.firstName} ${response.lastName} is added to the database.`);
+        initiateApp();
     })
 }
 
@@ -141,15 +140,5 @@ function userUpdateEmp () {
 
     
 }
-
-async function repeatQuestions(options) {
-    renderOutput(options);
-    console.log("hello");
-    await initiateApp();
-    
-}
-
-
-
 
 initiateApp();
