@@ -39,7 +39,9 @@ async function renderOutput(option) {
         
         case "View all employees" :
             const employee = new Employee();
-            employee.getAllEmployees();
+            console.log("================== All Employees ==============")
+            let [empRows, empFields] = await employee.getAllEmployees();
+            console.table(empRows);
             initiateApp();
             break;
 
