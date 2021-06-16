@@ -164,4 +164,4 @@ var updateEmpQuestions = [
     }
 ];
 
-module.exports = {initialQuestions, departmentQuestions, addEmpQuestions, updateEmpQuestions};
+module.exports = {initialQuestions, departmentQuestions, addEmpQuestions, updateEmpQuestions,  roleQuestions};
