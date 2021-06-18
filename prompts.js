@@ -14,7 +14,7 @@ var initialQuestions = [
         type : "list", 
         name : "options", 
         message : "What would you like to do?", 
-        choices : ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add an employee", "Update an employee role", "none"]
+        choices : ["View all departments", "View all roles", "View all employees", "View employees by manager", "View employees by department", "Add a department", "Add a role", "Add an employee", "Update an employee role", "Update employee manager", "Delete a department", "Delete a role", "Delete an employee", "View the total budget of a department", "none"]
     }
 ];
 
@@ -164,4 +164,60 @@ var updateEmpQuestions = [
     }
 ];
 
-module.exports = {initialQuestions, departmentQuestions, addEmpQuestions, updateEmpQuestions,  roleQuestions};
+var updateEmpManagerQuestions = [
+    {
+        type : 'list',
+        name : 'managerName',
+        message : "Which employee's manager do you want to update?",
+        choices : empList
+    },
+    {
+        type : 'list',
+        name : 'empName',
+        message : 'Which employee do you want to set as manager for the selected employee?',
+        choices : empList
+    }
+];
+
+var deleteDeptQuestions = [
+    {
+        type : 'list',
+        name : 'deleteDept',
+        message : "Which department do you want to delete?",
+        choices : deptList
+    }
+];
+
+var deleteRoleQuestions = [
+    {
+        type : 'list',
+        name : 'deleteRole',
+        message : "Which role do you want to delete?",
+        choices : roleList
+    }
+];
+
+var deleteEmpQuestions = [
+    {
+        type : 'list',
+        name : 'deleteEmp',
+        message : "Which employee do you want to delete?",
+        choices : empList
+    }
+];
+
+var budgetQuestions = [
+    {
+        type : 'list',
+        name : 'deptBudget',
+        message : "Choose the department to view the total utilized budget.",
+        choices : deptList
+    }
+]
+
+module.exports = {
+    initialQuestions, departmentQuestions, addEmpQuestions, 
+    updateEmpQuestions,  roleQuestions, updateEmpManagerQuestions,
+    deleteDeptQuestions, deleteRoleQuestions, deleteEmpQuestions,
+    budgetQuestions
+};
