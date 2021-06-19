@@ -219,7 +219,7 @@ var deleteRoleQuestions = [
 var deleteEmpQuestions = [
     {
         type : 'list',
-        name : 'deleteEmp',
+        name : 'empName',
         message : "Which employee do you want to delete?",
         choices : empList
     }

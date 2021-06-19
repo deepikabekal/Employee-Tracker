@@ -205,4 +205,14 @@ function callDeleteRole() {
     })
 }
 
+function callDeleteEmp() {
+    inquirer.prompt(prompts.deleteEmpQuestions)
+    .then(response => {
+        const employee = new Employee(response.empName);
+        employee.deleteEmployee();
+        console.log(`${response.empName} has been deleted.`);
+        initiateApp();
+    });
+}
+
 initiateApp();
