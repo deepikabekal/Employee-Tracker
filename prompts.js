@@ -177,7 +177,7 @@ var getEmpByManagerQuestions = [
 var getEmpByDeptQuesions = [
     {
         type : 'list',
-        name : 'managerName',
+        name : 'deptName',
         message : "Which department's employees do you want to view?",
         choices : deptList
     }

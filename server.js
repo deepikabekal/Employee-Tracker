@@ -50,7 +50,7 @@ async function renderOutput(option) {
             break;
             
         case "View employees by department" : 
-            getEmployeeByDepartment();
+            getEmployeesByDepartment();
             break;
 
         case "Add a department" :
@@ -77,6 +77,19 @@ async function renderOutput(option) {
 
     return;
 
+}
+
+function getEmployeesByDepartment () {
+    inquirer.prompt(prompts.getEmpByDeptQuesions)
+    .then (response => {
+        //console.log('response', response);
+        const employee = new Employee (response.deptName);
+        console.log(`================== All Employees of ${response.deptName} ==============`);
+        employee.getEmpByDepartment(initiateApp);
+    })
+    .catch (err => {
+        console.log("error is here", err);
+    })
 }
 
 function getEmployeeByManager () {
