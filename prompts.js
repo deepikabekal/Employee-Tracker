@@ -201,7 +201,7 @@ var updateEmpManagerQuestions = [
 var deleteDeptQuestions = [
     {
         type : 'list',
-        name : 'deleteDept',
+        name : 'deptName',
         message : "Which department do you want to delete?",
         choices : deptList
     }

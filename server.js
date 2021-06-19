@@ -54,19 +54,35 @@ async function renderOutput(option) {
             break;
 
         case "Add a department" :
-            userInputDept();
+            callAddDepartment();
             break;
 
         case "Add a role" :
-            userInputRole();
+            callAddRole();
             break;
 
         case "Add an employee" :
-            userInputEmp();
+            callAddEmployee();
             break;
 
         case "Update an employee role" :
-            userUpdateEmp();
+            callUpdateEmployee();
+            break;
+
+        case "Delete a department" : 
+            callDeleteDept();
+            break;
+
+        case "Delete a role" : 
+            callDeleteRole();
+            break;
+        
+        case "Delete an employee" : 
+            callDeleteEmp();
+            break;
+
+        case "View total budget of the department" :
+            callBudget();
             break;
 
         case "none" :
@@ -108,7 +124,7 @@ function getEmployeeByManager () {
     })
 }
 
-function userInputDept () {
+function callAddDepartment () {
     inquirer.prompt(prompts.departmentQuestions)
     .then((response) => {
         //console.log(response);
@@ -119,7 +135,7 @@ function userInputDept () {
     })
 }
 
-function userInputRole () {
+function callAddRole () {
     const department = new Department();
     var deptList = department.getDepartmentList();
     //console.log("deptList", deptList);
@@ -134,12 +150,9 @@ function userInputRole () {
 }
 
 
-function userInputEmp() {
+function callAddEmployee() {
     const employee = new Employee();
     const role = new Role();
-    var empList = employee.getEmployeeList();
-    //console.log("emplist", empList);
-    var roleList = role.getRoleList();
     inquirer.prompt(prompts.addEmpQuestions)
     .then(async response => {
         //console.log("response", response);
@@ -151,12 +164,9 @@ function userInputEmp() {
     })
 }
 
-function userUpdateEmp () {
+function callUpdateEmployee () {
     const employeeOne = new Employee();
     const roleOne = new Role();
-    var empListONe = employeeOne.getEmployeeList();
-    //console.log("emplist", empListONe);
-    var roleListONe = roleOne.getRoleList();
     inquirer.prompt(prompts.updateEmpQuestions)
     .then(response => {
         //console.log(response);
@@ -177,5 +187,17 @@ function userUpdateEmp () {
 
     
 }
+
+function callDeleteDept() {
+    inquirer.prompt(prompts.deleteDeptQuestions)
+    .then(response => {
+        const department = new Department(response.deptName);
+        department.deleteDepartment();
+        console.log(`${response.deptName} department has been deleted.`);
+        initiateApp();
+    })
+}
+
+
 
 initiateApp();
