@@ -45,6 +45,14 @@ async function renderOutput(option) {
             initiateApp();
             break;
 
+        case "View employees by manager" :
+            getEmployeeByManager();
+            break;
+            
+        case "View employees by department" : 
+            getEmployeeByDepartment();
+            break;
+
         case "Add a department" :
             userInputDept();
             break;
@@ -69,6 +77,22 @@ async function renderOutput(option) {
 
     return;
 
+}
+
+function getEmployeeByManager () {
+    inquirer.prompt(prompts.getEmpByManagerQuestions)
+    .then (response => {
+        //console.log("response", response);
+        const employee = new Employee (response.managerName);
+        //console.log("employee", employee1);
+        console.log(`================== All Employees of ${response.managerName} ==============`);
+        employee.getEmpByManagerId(initiateApp);
+        //console.table(empRows);
+        //initiateApp();
+
+    }).catch (err => {
+        console.log("error is here", err);
+    })
 }
 
 function userInputDept () {
@@ -104,12 +128,13 @@ function userInputEmp() {
     //console.log("emplist", empList);
     var roleList = role.getRoleList();
     inquirer.prompt(prompts.addEmpQuestions)
-    .then(response => {
+    .then(async response => {
         //console.log("response", response);
         const employee = new Employee(response);
-        employee.addEmployee();
+        employee.addEmployee(initiateApp);
+       
         console.log(`Employee ${response.firstName} ${response.lastName} is added to the database.`);
-        initiateApp();
+        //initiateApp();
     })
 }
 
@@ -117,7 +142,7 @@ function userUpdateEmp () {
     const employeeOne = new Employee();
     const roleOne = new Role();
     var empListONe = employeeOne.getEmployeeList();
-    console.log("emplist", empListONe);
+    //console.log("emplist", empListONe);
     var roleListONe = roleOne.getRoleList();
     inquirer.prompt(prompts.updateEmpQuestions)
     .then(response => {
@@ -130,9 +155,9 @@ function userUpdateEmp () {
         {
             //console.log("here");
             const employee = new Employee(response);
-            employee.updateEmployeeRole();
+            employee.updateEmployeeRole(initiateApp);
             console.log(`${response.employeeName}'s role has been updated.`);   
-            initiateApp();
+            //initiateApp();
         }
         
     })

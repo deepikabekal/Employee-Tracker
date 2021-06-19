@@ -7,6 +7,7 @@ const department = new Department();
 var empList = employee.getEmployeeList();
 var roleList = role.getRoleList();
 var deptList = department.getDepartmentList();
+var managerList = employee.getManagerList();
 
 
 var initialQuestions = [
@@ -164,6 +165,24 @@ var updateEmpQuestions = [
     }
 ];
 
+var getEmpByManagerQuestions = [
+    {
+        type : 'list',
+        name : 'managerName',
+        message : "Which manager's employees do you want to view?",
+        choices : managerList
+    }
+];
+
+var getEmpByDeptQuesions = [
+    {
+        type : 'list',
+        name : 'managerName',
+        message : "Which department's employees do you want to view?",
+        choices : deptList
+    }
+];
+
 var updateEmpManagerQuestions = [
     {
         type : 'list',
@@ -213,11 +232,11 @@ var budgetQuestions = [
         message : "Choose the department to view the total utilized budget.",
         choices : deptList
     }
-]
+];
 
 module.exports = {
     initialQuestions, departmentQuestions, addEmpQuestions, 
     updateEmpQuestions,  roleQuestions, updateEmpManagerQuestions,
     deleteDeptQuestions, deleteRoleQuestions, deleteEmpQuestions,
-    budgetQuestions
+    budgetQuestions, getEmpByDeptQuesions, getEmpByManagerQuestions
 };
