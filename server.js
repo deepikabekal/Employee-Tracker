@@ -137,15 +137,12 @@ function callAddDepartment () {
 
 function callAddRole () {
     const department = new Department();
-    var deptList = department.getDepartmentList();
-    //console.log("deptList", deptList);
     inquirer.prompt(prompts.roleQuestions)
     .then(response => {
         //console.log(response);
         const role = new Role(response);
-        role.addRole();
-        console.log(`Added role to the database.`); 
-        initiateApp();
+        role.addRole(initiateApp);
+        //initiateApp();
     })
 }
 
@@ -198,6 +195,14 @@ function callDeleteDept() {
     })
 }
 
-
+function callDeleteRole() {
+    inquirer.prompt(prompts.deleteRoleQuestions)
+    .then(response => {
+        const role = new Role(response.roleName);
+        role.deleteRole();
+        console.log(`${response.roleName} role has been deleted.`);
+        initiateApp();
+    })
+}
 
 initiateApp();

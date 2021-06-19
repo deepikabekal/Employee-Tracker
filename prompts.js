@@ -210,7 +210,7 @@ var deleteDeptQuestions = [
 var deleteRoleQuestions = [
     {
         type : 'list',
-        name : 'deleteRole',
+        name : 'roleName',
         message : "Which role do you want to delete?",
         choices : roleList
     }
