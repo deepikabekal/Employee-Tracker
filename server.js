@@ -4,7 +4,8 @@ const prompts = require('./prompts');
 const Department = require ('./lib/Department');
 const Employee = require ('./lib/Employee');
 const Role = require ('./lib/Role');
-//const { promise } = require('./db/connection');
+const COLOR = {fgGreen: '\x1b[32m', reset: '\x1b[0m'}; //change the color of the result
+
 
 
 
@@ -23,25 +24,28 @@ async function renderOutput(option) {
     switch (option) {
         case "View all departments" :
             const department = new Department();
-            console.log ("=================  All Departments ===========");
+            console.log (`${COLOR.fgGreen}=================  All Departments ===========${COLOR.reset}`);
             let [deptRows,deptFields]  =  await department.getAllDepartments();
             console.table(deptRows)
+            console.log (`${COLOR.fgGreen}==============================================${COLOR.reset}`);
             initiateApp();            
             break;
         
         case "View all roles" :
             const role = new Role();
-            console.log ("=================  All Roles ===========");
+            console.log (`${COLOR.fgGreen}=================  All Roles ================${COLOR.reset}`);
             let [roleRows, roleFields] = await role.getAllRoles();
             console.table(roleRows);
+            console.log (`${COLOR.fgGreen}=============================================${COLOR.reset}`);
             initiateApp();
             break;
         
         case "View all employees" :
             const employee = new Employee();
-            console.log("================== All Employees ==============")
+            console.log (`${COLOR.fgGreen}=================  All Employees ===========${COLOR.reset}`);
             let [empRows, empFields] = await employee.getAllEmployees();
             console.table(empRows);
+            console.log (`${COLOR.fgGreen}============================================${COLOR.reset}`);
             initiateApp();
             break;
 
@@ -81,7 +85,7 @@ async function renderOutput(option) {
             callDeleteEmp();
             break;
 
-        case "View total budget of the department" :
+        case "View the total budget of a department" :
             callBudget();
             break;
 
@@ -100,7 +104,7 @@ function getEmployeesByDepartment () {
     .then (response => {
         //console.log('response', response);
         const employee = new Employee (response.deptName);
-        console.log(`================== All Employees of ${response.deptName} ==============`);
+        console.log(`${COLOR.fgGreen}================== All Employees of ${response.deptName} ==============${COLOR.reset}`);
         employee.getEmpByDepartment(initiateApp);
     })
     .catch (err => {
@@ -114,7 +118,7 @@ function getEmployeeByManager () {
         //console.log("response", response);
         const employee = new Employee (response.managerName);
         //console.log("employee", employee1);
-        console.log(`================== All Employees of ${response.managerName} ==============`);
+        console.log(`${COLOR.fgGreen}================== All Employees of ${response.managerName} ==============${COLOR.reset}`);
         employee.getEmpByManagerId(initiateApp);
         //console.table(empRows);
         //initiateApp();
@@ -130,7 +134,7 @@ function callAddDepartment () {
         //console.log(response);
         const department = new Department(response.name);
         department.addDepartment();
-        console.log(`Added ${response.name} department to the database.`);
+        console.log(`${COLOR.fgGreen}Added ${response.name} department to the database.${COLOR.reset}`);
         initiateApp();
     })
 }
@@ -155,8 +159,7 @@ function callAddEmployee() {
         //console.log("response", response);
         const employee = new Employee(response);
         employee.addEmployee(initiateApp);
-       
-        console.log(`Employee ${response.firstName} ${response.lastName} is added to the database.`);
+        console.log(`${COLOR.fgGreen}Employee ${response.firstName} ${response.lastName} is added to the database.${COLOR.reset}`);
         //initiateApp();
     })
 }
@@ -176,7 +179,7 @@ function callUpdateEmployee () {
             //console.log("here");
             const employee = new Employee(response);
             employee.updateEmployeeRole(initiateApp);
-            console.log(`${response.employeeName}'s role has been updated.`);   
+            console.log(`${COLOR.fgGreen}${response.employeeName}'s role has been updated.${COLOR.reset}`);   
             //initiateApp();
         }
         
@@ -190,7 +193,7 @@ function callDeleteDept() {
     .then(response => {
         const department = new Department(response.deptName);
         department.deleteDepartment();
-        console.log(`${response.deptName} department has been deleted.`);
+        console.log(`${COLOR.fgGreen}${response.deptName} department has been deleted.${COLOR.reset}`);
         initiateApp();
     })
 }
@@ -200,7 +203,7 @@ function callDeleteRole() {
     .then(response => {
         const role = new Role(response.roleName);
         role.deleteRole();
-        console.log(`${response.roleName} role has been deleted.`);
+        console.log(`${COLOR.fgGreen}${response.roleName} role has been deleted.${COLOR.reset}`);
         initiateApp();
     })
 }
@@ -210,9 +213,17 @@ function callDeleteEmp() {
     .then(response => {
         const employee = new Employee(response.empName);
         employee.deleteEmployee();
-        console.log(`${response.empName} has been deleted.`);
+        console.log(`${COLOR.fgGreen}${response.empName} has been deleted.${COLOR.reset}`);
         initiateApp();
     });
 }
 
+function callBudget() {
+    inquirer.prompt(prompts.budgetQuestions)
+    .then (response => {
+        const department = new Department (response.deptName);
+        department.getBudget(initiateApp);
+    })
+
+}
 initiateApp();

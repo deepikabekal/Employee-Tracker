@@ -228,7 +228,7 @@ var deleteEmpQuestions = [
 var budgetQuestions = [
     {
         type : 'list',
-        name : 'deptBudget',
+        name : 'deptName',
         message : "Choose the department to view the total utilized budget.",
         choices : deptList
     }
