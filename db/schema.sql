@@ -1,3 +1,4 @@
+-- remove the existing tables and create the new ones
 DROP TABLE IF EXISTS departments;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS employees;
