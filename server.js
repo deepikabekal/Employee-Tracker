@@ -195,7 +195,7 @@ function callUpdateEmployeeManager() {
     const employee = new Employee();
     inquirer.prompt(prompts.updateEmpManagerQuestions)
     .then(response => {
-        console.log("response", response);
+        //console.log("response", response);
         
             const employee = new Employee(response);
             employee.updateEmpManager(initiateApp);
