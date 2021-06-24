@@ -11,7 +11,7 @@ const COLOR = {fgGreen: '\x1b[32m', reset: '\x1b[0m'}; //change the color of the
 
 
 function initiateApp () {
-    console.log("I am inside the initiateApp");
+    //console.log("I am inside the initiateApp");
     inquirer.prompt(prompts.initialQuestions)
     .then(response => {
         renderOutput(response.options);                        
@@ -71,6 +71,10 @@ async function renderOutput(option) {
 
         case "Update an employee role" :
             callUpdateEmployee();
+            break;
+
+        case "Update employee manager" : 
+            callUpdateEmployeeManager();
             break;
 
         case "Delete a department" : 
@@ -165,8 +169,7 @@ function callAddEmployee() {
 }
 
 function callUpdateEmployee () {
-    const employeeOne = new Employee();
-    const roleOne = new Role();
+    
     inquirer.prompt(prompts.updateEmpQuestions)
     .then(response => {
         //console.log(response);
@@ -186,6 +189,20 @@ function callUpdateEmployee () {
     })
 
     
+}
+
+function callUpdateEmployeeManager() {
+    const employee = new Employee();
+    inquirer.prompt(prompts.updateEmpManagerQuestions)
+    .then(response => {
+        console.log("response", response);
+        
+            const employee = new Employee(response);
+            employee.updateEmpManager(initiateApp);
+            console.log(`${COLOR.fgGreen}${response.empName}'s manager has been updated.${COLOR.reset}`);
+        
+
+    })
 }
 
 function callDeleteDept() {

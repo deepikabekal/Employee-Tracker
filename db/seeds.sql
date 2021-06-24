@@ -23,6 +23,6 @@ VALUES
   ('Robert', 'Bruce', 4, 8),
   ('Peter', 'Greenaway', 2, null),
   ('Derek', 'Jarman', 6, 1),
-  ('Paolo', 'Pasolini', 8, null),
+  ('Paolo', 'Pasolini', 2, null),
   ('Heathcote', 'Williams', 5, 2),
   ('Sandy', 'Powell', 7, null);

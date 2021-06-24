@@ -186,13 +186,13 @@ var getEmpByDeptQuesions = [
 var updateEmpManagerQuestions = [
     {
         type : 'list',
-        name : 'managerName',
+        name : 'empName',
         message : "Which employee's manager do you want to update?",
         choices : empList
     },
     {
         type : 'list',
-        name : 'empName',
+        name : 'managerName',
         message : 'Which employee do you want to set as manager for the selected employee?',
         choices : empList
     }
