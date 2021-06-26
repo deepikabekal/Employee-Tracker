@@ -13,7 +13,7 @@ Developers frequently have to create interfaces that make it easy for non-develo
 * [Contributing](#contributing)
 
 ## Walkthrough Video
-
+https://drive.google.com/file/d/17ozE3TxOcHjhC44iWRWpfl6nok9sfCTj/view?usp=sharing
 
 ## Installation
 1. Make sure to have MySQL installed.
