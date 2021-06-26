@@ -1,14 +1,4 @@
-const Department = require ('./lib/Department');
-const Employee = require ('./lib/Employee');
-const Role = require ('./lib/Role');
-const employee = new Employee();
-const role = new Role();
-const department = new Department();
-var empList = employee.getEmployeeList();
-var roleList = role.getRoleList();
-var deptList = department.getDepartmentList();
-var managerList = employee.getManagerList();
-
+//question of the respective prompts
 
 var initialQuestions = [
     {
