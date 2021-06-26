@@ -104,6 +104,9 @@ async function renderOutput(option) {
 }
 
 function getEmployeesByDepartment () {
+    const department = new Department();
+    const deptList = await department.getDepartmentList();
+    prompts.deleteDeptQuestions.choices = deptList;
     inquirer.prompt(prompts.getEmpByDeptQuesions)
     .then (response => {
         //console.log('response', response);

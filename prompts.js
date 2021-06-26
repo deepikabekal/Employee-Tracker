@@ -1,13 +1,13 @@
-const Department = require ('./lib/Department');
-const Employee = require ('./lib/Employee');
-const Role = require ('./lib/Role');
-const employee = new Employee();
-const role = new Role();
-const department = new Department();
-var empList = employee.getEmployeeList();
-var roleList = role.getRoleList();
-var deptList = department.getDepartmentList();
-var managerList = employee.getManagerList();
+// const Department = require ('./lib/Department');
+// const Employee = require ('./lib/Employee');
+// const Role = require ('./lib/Role');
+// const employee = new Employee();
+// const role = new Role();
+// const department = new Department();
+// var empList = employee.getEmployeeList();
+// var roleList = role.getRoleList();
+// var deptList = department.getDepartmentList();
+// var managerList = employee.getManagerList();
 
 
 var initialQuestions = [
@@ -19,7 +19,7 @@ var initialQuestions = [
     }
 ];
 
-var departmentQuestions = 
+var addDepartmentQuestions = 
     {
         type : 'input',
         name : 'name',
@@ -37,7 +37,7 @@ var departmentQuestions =
         }
     };
 
-var roleQuestions = [
+var addRoleQuestions = [
     {
         type : 'input', 
         name : 'title',
@@ -70,8 +70,7 @@ var roleQuestions = [
     {
         type : 'list',
         name : 'departmentName',
-        message : 'Choose a department to which the role belongs.',
-        choices : deptList
+        message : 'Choose a department to which the role belongs.'
     }
 ];
 
@@ -175,8 +174,7 @@ var getEmpByDeptQuesions =
     {
         type : 'list',
         name : 'deptName',
-        message : "Which department's employees do you want to view?",
-        choices : deptList
+        message : "Which department's employees do you want to view?"
     };
 
 var updateEmpManagerQuestions = [
@@ -223,8 +221,8 @@ var budgetQuestions =
     };
 
 module.exports = {
-    initialQuestions, departmentQuestions, addEmpQuestions, 
-    updateEmpQuestions,  roleQuestions, updateEmpManagerQuestions,
+    initialQuestions, addDepartmentQuestions, addEmpQuestions, 
+    updateEmpQuestions,  addRoleQuestions, updateEmpManagerQuestions,
     deleteDeptQuestions, deleteRoleQuestions, deleteEmpQuestions,
     budgetQuestions, getEmpByDeptQuesions, getEmpByManagerQuestions
 };
