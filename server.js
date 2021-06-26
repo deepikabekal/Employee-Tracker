@@ -205,7 +205,10 @@ function callUpdateEmployeeManager() {
     })
 }
 
-function callDeleteDept() {
+async function callDeleteDept() {
+    const department = new Department();
+    const deptList = await department.getDepartmentList();
+    prompts.deleteDeptQuestions.choices = deptList;
     inquirer.prompt(prompts.deleteDeptQuestions)
     .then(response => {
         const department = new Department(response.deptName);

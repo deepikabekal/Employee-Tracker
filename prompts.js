@@ -19,7 +19,7 @@ var initialQuestions = [
     }
 ];
 
-var departmentQuestions = [
+var departmentQuestions = 
     {
         type : 'input',
         name : 'name',
@@ -35,9 +35,7 @@ var departmentQuestions = [
                 return false;
             }
         }
-    }
-    
-];
+    };
 
 var roleQuestions = [
     {
@@ -165,23 +163,21 @@ var updateEmpQuestions = [
     }
 ];
 
-var getEmpByManagerQuestions = [
+var getEmpByManagerQuestions = 
     {
         type : 'list',
         name : 'managerName',
         message : "Which manager's employees do you want to view?",
         choices : managerList
-    }
-];
+    };
 
-var getEmpByDeptQuesions = [
+var getEmpByDeptQuesions = 
     {
         type : 'list',
         name : 'deptName',
         message : "Which department's employees do you want to view?",
         choices : deptList
-    }
-];
+    };
 
 var updateEmpManagerQuestions = [
     {
@@ -198,41 +194,38 @@ var updateEmpManagerQuestions = [
     }
 ];
 
-var deleteDeptQuestions = [
+var deleteDeptQuestions = 
     {
         type : 'list',
         name : 'deptName',
         message : "Which department do you want to delete?",
         choices : deptList
-    }
-];
+        
+    };
 
-var deleteRoleQuestions = [
+var deleteRoleQuestions = 
     {
         type : 'list',
         name : 'roleName',
         message : "Which role do you want to delete?",
         choices : roleList
-    }
-];
+    };
 
-var deleteEmpQuestions = [
+var deleteEmpQuestions = 
     {
         type : 'list',
         name : 'empName',
         message : "Which employee do you want to delete?",
         choices : empList
-    }
-];
+    };
 
-var budgetQuestions = [
+var budgetQuestions = 
     {
         type : 'list',
         name : 'deptName',
         message : "Choose the department to view the total utilized budget.",
         choices : deptList
-    }
-];
+    };
 
 module.exports = {
     initialQuestions, departmentQuestions, addEmpQuestions, 
