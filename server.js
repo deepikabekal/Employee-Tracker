@@ -177,7 +177,7 @@ async function callAddRole () {
 }
 
 
-function callAddEmployee() {
+async function callAddEmployee() {
     const employee = new Employee();
     const empList = employee.getEmployeeList();
     prompts.addEmpQuestions[3].choices = empList;
@@ -281,7 +281,7 @@ async function callBudget() {
     const department = new Department();
     const deptList = await department.getDepartmentList()
     prompts.budgetQuestions.choices = deptList;
-    
+
     inquirer.prompt(prompts.budgetQuestions)
     .then (response => {
         const department = new Department (response.deptName);
