@@ -106,7 +106,6 @@ async function renderOutput(option) {
 async function getEmployeesByDepartment () {
     const department = new Department();
     const deptList = await department.getDepartmentList();
-    console.log(deptList);
     prompts.getEmpByDeptQuesions.choices = deptList;
     inquirer.prompt(prompts.getEmpByDeptQuesions)
     .then (response => {
@@ -120,17 +119,17 @@ async function getEmployeesByDepartment () {
     })
 }
 
-function getEmployeeByManager () {
+async function getEmployeeByManager () {
+    const employee = new Employee();
+    const managerList = await employee.getManagerList();
+    prompts.getEmpByManagerQuestions.choices = managerList;
     inquirer.prompt(prompts.getEmpByManagerQuestions)
     .then (response => {
-        //console.log("response", response);
         const employee = new Employee (response.managerName);
         //console.log("employee", employee1);
         console.log(`${COLOR.fgGreen}================== All Employees of ${response.managerName} ==============${COLOR.reset}`);
         employee.getEmpByManagerId(initiateApp);
         //console.table(empRows);
-        //initiateApp();
-
     }).catch (err => {
         console.log("error is here", err);
     })
