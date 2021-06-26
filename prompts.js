@@ -198,25 +198,21 @@ var deleteDeptQuestions =
     {
         type : 'list',
         name : 'deptName',
-        message : "Which department do you want to delete?",
-        choices : deptList
-        
+        message : "Which department do you want to delete?"        
     };
 
 var deleteRoleQuestions = 
     {
         type : 'list',
         name : 'roleName',
-        message : "Which role do you want to delete?",
-        choices : roleList
+        message : "Which role do you want to delete?"
     };
 
 var deleteEmpQuestions = 
     {
         type : 'list',
         name : 'empName',
-        message : "Which employee do you want to delete?",
-        choices : empList
+        message : "Which employee do you want to delete?"
     };
 
 var budgetQuestions = 
@@ -224,7 +220,6 @@ var budgetQuestions =
         type : 'list',
         name : 'deptName',
         message : "Choose the department to view the total utilized budget.",
-        choices : deptList
     };
 
 module.exports = {

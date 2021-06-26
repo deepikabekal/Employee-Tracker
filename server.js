@@ -218,7 +218,10 @@ async function callDeleteDept() {
     })
 }
 
-function callDeleteRole() {
+async function callDeleteRole() {
+    const role = new Role();
+    const roleList = await role.getRoleList();
+    prompts.deleteRoleQuestions.choices = roleList;
     inquirer.prompt(prompts.deleteRoleQuestions)
     .then(response => {
         const role = new Role(response.roleName);
