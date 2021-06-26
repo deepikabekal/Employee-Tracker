@@ -120,43 +120,17 @@ var addEmpQuestions = [
 ];
 
 var updateEmpRoleQuestions = [
-    // {
-    //     type : 'confirm',
-    //     name : "confirmation",
-    //     message : "Do you want to update an employee information?"
-        
-    // },
     {
         type : 'list',
         name : 'employeeName',
         message : "Which employee information do you want to update?",
-        // choices : empList,
-        // when : ({confirmation}) => {
-        //     if(confirmation)
-        //     {
-        //         return true;
-        //     }
-        //     else
-        //     {
-        //         return false;
-        //     }
-        // }
+        
     },
     {
         type : 'list',
         name : 'roleName',
         message  :'Choose a role',
-        // choices : roleList,
-        // when : ({confirmation}) => {
-        //     if(confirmation)
-        //     {
-        //         return true;
-        //     }
-        //     else
-        //     {
-        //         return false;
-        //     }
-        // }
+        
     }
 ];
 

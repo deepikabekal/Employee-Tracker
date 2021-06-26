@@ -21,33 +21,18 @@ function initiateApp () {
 
 
 
-async function renderOutput(option) {
+function renderOutput(option) {
     switch (option) {
         case "View all departments" :
-            const department = new Department();
-            console.log (`${COLOR.fgGreen}=================  All Departments ===========${COLOR.reset}`);
-            let [deptRows,deptFields]  =  await department.getAllDepartments();
-            console.table(deptRows)
-            console.log (`${COLOR.fgGreen}==============================================${COLOR.reset}`);
-            initiateApp();            
+            viewAllDept();            
             break;
         
         case "View all roles" :
-            const role = new Role();
-            console.log (`${COLOR.fgGreen}=================  All Roles ================${COLOR.reset}`);
-            let [roleRows, roleFields] = await role.getAllRoles();
-            console.table(roleRows);
-            console.log (`${COLOR.fgGreen}=============================================${COLOR.reset}`);
-            initiateApp();
+            viewAllRoles();
             break;
         
         case "View all employees" :
-            const employee = new Employee();
-            console.log (`${COLOR.fgGreen}=================  All Employees ===========${COLOR.reset}`);
-            let [empRows, empFields] = await employee.getAllEmployees();
-            console.table(empRows);
-            console.log (`${COLOR.fgGreen}============================================${COLOR.reset}`);
-            initiateApp();
+            viewAllEmployees();
             break;
 
         case "View employees by manager" :
@@ -102,6 +87,34 @@ async function renderOutput(option) {
 
     return;
 
+}
+
+async function viewAllDept() {
+    const department = new Department();
+    console.log (`${COLOR.fgGreen}=================  All Departments ===========${COLOR.reset}`);
+    let [deptRows,deptFields]  =  await department.getAllDepartments();
+    console.table(deptRows)
+    console.log (`${COLOR.fgGreen}==============================================${COLOR.reset}`);
+    initiateApp();
+}
+
+async function viewAllRoles() {
+    const role = new Role();
+    console.log (`${COLOR.fgGreen}=================  All Roles ================${COLOR.reset}`);
+    let [roleRows, roleFields] = await role.getAllRoles();
+    console.table(roleRows);
+    console.log (`${COLOR.fgGreen}=============================================${COLOR.reset}`);
+    initiateApp();
+
+}
+
+async function viewAllEmployees() {
+    const employee = new Employee();
+    console.log (`${COLOR.fgGreen}=================  All Employees ===========${COLOR.reset}`);
+    let [empRows, empFields] = await employee.getAllEmployees();
+    console.table(empRows);
+    console.log (`${COLOR.fgGreen}============================================${COLOR.reset}`);
+    initiateApp();
 }
 
 async function getEmployeesByDepartment () {
@@ -182,20 +195,9 @@ async function callUpdateEmployeeRole () {
     
     inquirer.prompt(prompts.updateEmpRoleQuestions)
     .then(response => {
-        //console.log(response);
-        // if (!response.confirmation)
-        // {
-        //     initiateApp();
-        // }
-        // else
-        //{
-            //console.log("here");
             const employee = new Employee(response);
             employee.updateEmployeeRole(initiateApp);
-            console.log(`${COLOR.fgGreen}${response.employeeName}'s role has been updated.${COLOR.reset}`);   
-            //initiateApp();
-        //}
-        
+            console.log(`${COLOR.fgGreen}${response.employeeName}'s role has been updated.${COLOR.reset}`);          
     })
 
     
@@ -258,12 +260,15 @@ async function callDeleteEmp() {
     });
 }
 
-function callBudget() {
+async function callBudget() {
+    const department = new Department();
+    const deptList = await department.getDepartmentList()
+    prompts.budgetQuestions.choices = deptList;
     inquirer.prompt(prompts.budgetQuestions)
     .then (response => {
         const department = new Department (response.deptName);
         department.getBudget(initiateApp);
-    })
-
+    });
 }
+
 initiateApp();
