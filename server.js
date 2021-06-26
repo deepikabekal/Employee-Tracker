@@ -207,6 +207,7 @@ async function callUpdateEmployeeRole () {
     
     inquirer.prompt(prompts.updateEmpRoleQuestions)
     .then(response => {
+        console.log(response);
             const employee = new Employee(response);
             employee.updateEmployeeRole(initiateApp);
             console.log(`${COLOR.fgGreen}${response.employeeName}'s role has been updated.${COLOR.reset}`);          
@@ -224,15 +225,12 @@ async function callUpdateEmployeeManager() {
     prompts.updateEmpManagerQuestions[0].choices = empList;
 
     inquirer.prompt(prompts.updateEmpManagerQuestions)
-    .then(response => {
-        //console.log("response", response);
-        
-            const employee = new Employee(response);
-            employee.updateEmpManager(initiateApp);
-            console.log(`${COLOR.fgGreen}${response.empName}'s manager has been updated.${COLOR.reset}`);
-        
+    .then(response => {        
+        const employee = new Employee(response);
+        employee.updateEmpManager(initiateApp);
+        console.log(`${COLOR.fgGreen}${response.empName}'s manager has been updated.${COLOR.reset}`);      
 
-    })
+    });
 }
 
 async function callDeleteDept() {
