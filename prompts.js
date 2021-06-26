@@ -1,13 +1,13 @@
-// const Department = require ('./lib/Department');
-// const Employee = require ('./lib/Employee');
-// const Role = require ('./lib/Role');
-// const employee = new Employee();
-// const role = new Role();
-// const department = new Department();
-// var empList = employee.getEmployeeList();
-// var roleList = role.getRoleList();
-// var deptList = department.getDepartmentList();
-// var managerList = employee.getManagerList();
+const Department = require ('./lib/Department');
+const Employee = require ('./lib/Employee');
+const Role = require ('./lib/Role');
+const employee = new Employee();
+const role = new Role();
+const department = new Department();
+var empList = employee.getEmployeeList();
+var roleList = role.getRoleList();
+var deptList = department.getDepartmentList();
+var managerList = employee.getManagerList();
 
 
 var initialQuestions = [
@@ -110,14 +110,12 @@ var addEmpQuestions = [
     {
         type : 'list',
         name : 'roleName', 
-        message : 'What is the role of the employee?',
-        choices : roleList
+        message : 'What is the role of the employee?'
     },
     {
         type : 'list',
         name : 'managerName', 
-        message : 'What is the name of the Manager?',
-        choices : empList
+        message : 'What is the name of the Manager?'
     }
 ];
 
@@ -166,8 +164,7 @@ var getEmpByManagerQuestions =
     {
         type : 'list',
         name : 'managerName',
-        message : "Which manager's employees do you want to view?",
-        choices : managerList
+        message : "Which manager's employees do you want to view?"
     };
 
 var getEmpByDeptQuesions = 
@@ -181,14 +178,12 @@ var updateEmpManagerQuestions = [
     {
         type : 'list',
         name : 'empName',
-        message : "Which employee's manager do you want to update?",
-        choices : empList
+        message : "Which employee's manager do you want to update?"
     },
     {
         type : 'list',
         name : 'managerName',
-        message : 'Which employee do you want to set as manager for the selected employee?',
-        choices : empList
+        message : 'Which employee do you want to set as manager for the selected employee?'
     }
 ];
 

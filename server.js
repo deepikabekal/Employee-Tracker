@@ -103,10 +103,11 @@ async function renderOutput(option) {
 
 }
 
-function getEmployeesByDepartment () {
+async function getEmployeesByDepartment () {
     const department = new Department();
     const deptList = await department.getDepartmentList();
-    prompts.deleteDeptQuestions.choices = deptList;
+    console.log(deptList);
+    prompts.getEmpByDeptQuesions.choices = deptList;
     inquirer.prompt(prompts.getEmpByDeptQuesions)
     .then (response => {
         //console.log('response', response);
@@ -136,7 +137,7 @@ function getEmployeeByManager () {
 }
 
 function callAddDepartment () {
-    inquirer.prompt(prompts.departmentQuestions)
+    inquirer.prompt(prompts.addDepartmentQuestions)
     .then((response) => {
         //console.log(response);
         const department = new Department(response.name);
@@ -148,7 +149,7 @@ function callAddDepartment () {
 
 function callAddRole () {
     const department = new Department();
-    inquirer.prompt(prompts.roleQuestions)
+    inquirer.prompt(prompts.addRoleQuestions)
     .then(response => {
         //console.log(response);
         const role = new Role(response);
