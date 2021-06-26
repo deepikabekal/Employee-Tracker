@@ -4,6 +4,7 @@ const prompts = require('./prompts');
 const Department = require ('./lib/Department');
 const Employee = require ('./lib/Employee');
 const Role = require ('./lib/Role');
+const { promise } = require('./db/connection');
 const COLOR = {fgGreen: '\x1b[32m', reset: '\x1b[0m'}; //change the color of the result
 
 
@@ -70,7 +71,7 @@ async function renderOutput(option) {
             break;
 
         case "Update an employee role" :
-            callUpdateEmployee();
+            callUpdateEmployeeRole();
             break;
 
         case "Update employee manager" : 
@@ -171,31 +172,41 @@ function callAddEmployee() {
     })
 }
 
-function callUpdateEmployee () {
+async function callUpdateEmployeeRole () {
+    const employee = new Employee();
+    const empList = await employee.getEmployeeList();
+    prompts.updateEmpRoleQuestions[0].choices = empList;
+    const role = new Role();
+    const roleList = await role.getRoleList();
+    prompts.updateEmpRoleQuestions[1].choices = roleList;
     
-    inquirer.prompt(prompts.updateEmpQuestions)
+    inquirer.prompt(prompts.updateEmpRoleQuestions)
     .then(response => {
         //console.log(response);
-        if (!response.confirmation)
-        {
-            initiateApp();
-        }
-        else
-        {
+        // if (!response.confirmation)
+        // {
+        //     initiateApp();
+        // }
+        // else
+        //{
             //console.log("here");
             const employee = new Employee(response);
             employee.updateEmployeeRole(initiateApp);
             console.log(`${COLOR.fgGreen}${response.employeeName}'s role has been updated.${COLOR.reset}`);   
             //initiateApp();
-        }
+        //}
         
     })
 
     
 }
 
-function callUpdateEmployeeManager() {
+async function callUpdateEmployeeManager() {
     const employee = new Employee();
+    const managerList = await employee.getManagerList();
+    prompts.updateEmpManagerQuestions[1].choices = managerList;
+    const empList = await employee.getEmployeeList();
+    prompts.updateEmpManagerQuestions[0].choices = empList;
     inquirer.prompt(prompts.updateEmpManagerQuestions)
     .then(response => {
         //console.log("response", response);
