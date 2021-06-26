@@ -231,7 +231,10 @@ async function callDeleteRole() {
     })
 }
 
-function callDeleteEmp() {
+async function callDeleteEmp() {
+    const employee = new Employee();
+    const empList = await employee.getEmployeeList();
+    prompts.deleteEmpQuestions.choices = empList;
     inquirer.prompt(prompts.deleteEmpQuestions)
     .then(response => {
         const employee = new Employee(response.empName);
