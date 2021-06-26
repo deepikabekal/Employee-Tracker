@@ -179,7 +179,7 @@ async function callAddRole () {
 
 async function callAddEmployee() {
     const employee = new Employee();
-    const empList = employee.getEmployeeList();
+    const empList =await employee.getEmployeeList();
     prompts.addEmpQuestions[3].choices = empList;
 
     const role = new Role();
