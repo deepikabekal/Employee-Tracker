@@ -121,6 +121,7 @@ async function getEmployeesByDepartment () {
     const department = new Department();
     const deptList = await department.getDepartmentList();
     prompts.getEmpByDeptQuesions.choices = deptList;
+
     inquirer.prompt(prompts.getEmpByDeptQuesions)
     .then (response => {
         //console.log('response', response);
@@ -137,6 +138,7 @@ async function getEmployeeByManager () {
     const employee = new Employee();
     const managerList = await employee.getManagerList();
     prompts.getEmpByManagerQuestions.choices = managerList;
+
     inquirer.prompt(prompts.getEmpByManagerQuestions)
     .then (response => {
         const employee = new Employee (response.managerName);
@@ -160,8 +162,11 @@ function callAddDepartment () {
     })
 }
 
-function callAddRole () {
+async function callAddRole () {
     const department = new Department();
+    const deptList = await department.getDepartmentList();
+    prompts.addRoleQuestions[2].choices = deptList;
+
     inquirer.prompt(prompts.addRoleQuestions)
     .then(response => {
         //console.log(response);
@@ -174,7 +179,13 @@ function callAddRole () {
 
 function callAddEmployee() {
     const employee = new Employee();
+    const empList = employee.getEmployeeList();
+    prompts.addEmpQuestions[3].choices = empList;
+
     const role = new Role();
+    const roleList = await role.getRoleList();
+    prompts.addEmpQuestions[2].choices = roleList;
+
     inquirer.prompt(prompts.addEmpQuestions)
     .then(async response => {
         //console.log("response", response);
@@ -189,6 +200,7 @@ async function callUpdateEmployeeRole () {
     const employee = new Employee();
     const empList = await employee.getEmployeeList();
     prompts.updateEmpRoleQuestions[0].choices = empList;
+
     const role = new Role();
     const roleList = await role.getRoleList();
     prompts.updateEmpRoleQuestions[1].choices = roleList;
@@ -207,8 +219,10 @@ async function callUpdateEmployeeManager() {
     const employee = new Employee();
     const managerList = await employee.getManagerList();
     prompts.updateEmpManagerQuestions[1].choices = managerList;
+
     const empList = await employee.getEmployeeList();
     prompts.updateEmpManagerQuestions[0].choices = empList;
+
     inquirer.prompt(prompts.updateEmpManagerQuestions)
     .then(response => {
         //console.log("response", response);
@@ -225,6 +239,7 @@ async function callDeleteDept() {
     const department = new Department();
     const deptList = await department.getDepartmentList();
     prompts.deleteDeptQuestions.choices = deptList;
+
     inquirer.prompt(prompts.deleteDeptQuestions)
     .then(response => {
         const department = new Department(response.deptName);
@@ -238,6 +253,7 @@ async function callDeleteRole() {
     const role = new Role();
     const roleList = await role.getRoleList();
     prompts.deleteRoleQuestions.choices = roleList;
+
     inquirer.prompt(prompts.deleteRoleQuestions)
     .then(response => {
         const role = new Role(response.roleName);
@@ -251,6 +267,7 @@ async function callDeleteEmp() {
     const employee = new Employee();
     const empList = await employee.getEmployeeList();
     prompts.deleteEmpQuestions.choices = empList;
+
     inquirer.prompt(prompts.deleteEmpQuestions)
     .then(response => {
         const employee = new Employee(response.empName);
@@ -264,6 +281,7 @@ async function callBudget() {
     const department = new Department();
     const deptList = await department.getDepartmentList()
     prompts.budgetQuestions.choices = deptList;
+    
     inquirer.prompt(prompts.budgetQuestions)
     .then (response => {
         const department = new Department (response.deptName);
